@@ -1,9 +1,10 @@
 import React from 'react'
 import CSS from './BurgerIngredient.css'
+import PropTypes from 'prop-types'
 
 const BugerIngredient = props =>{
     
-    let bugerIngredient = null;
+    let ingredient = null;
 
     switch(props.type){
         case('bread-bottom'):
@@ -19,26 +20,25 @@ const BugerIngredient = props =>{
         case('meat'):
             ingredient = <div className={CSS.Meat}></div>
             break;
-        case('Cheese'):
+        case('cheese'):
             ingredient = <div className={CSS.Cheese}></div>
             break;
-        case('Salad'):
+        case('salad'):
             ingredient = <div className={CSS.Salad}></div>
             break;
-        case('Bacon'):
+        case('bacon'):
             ingredient = <div className={CSS.Bacon}></div>
             break;
         default:
             ingredient = null
-    return ingredient
+    
             
     }
+    return ingredient
     
-    
-    
-    return(
-        <div>
-
-        </div>
-    )
+    BugerIngredient.propTypes = {
+        type: PropTypes.string.isRequired
+    }
 }
+
+export default BugerIngredient
