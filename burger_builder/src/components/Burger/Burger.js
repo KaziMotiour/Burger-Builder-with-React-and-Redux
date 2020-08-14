@@ -5,14 +5,14 @@ import BurgerBuilder from '../../containers/BurgerBuilder/BurgerBuilder'
 
 const burger = props =>{
 
-    let transformIngredients = Object.keys(props.ingredients).map(igkey =>{
-        return [...Array(props.ingredients[igkey])].map((_, i) =>{
-            return <BurgerIngredient key={igkey+i} type={igkey} />
-        })
- }).reduce((arr, stateEl) =>{
+    let transformIngredients = Object.keys(props.ingredients).map(igkey =>(
+        [...Array(props.ingredients[igkey])].map((_, i) =>(
+            <BurgerIngredient key={igkey+i} type={igkey} />
+        ))
+ )).reduce((arr, stateEl) =>(
      
-     return arr.concat(stateEl)
- },)
+    arr.concat(stateEl)
+ ),[])
 
  if(transformIngredients.length ===0){
      transformIngredients=<p>Please start adding ingredients"</p>
