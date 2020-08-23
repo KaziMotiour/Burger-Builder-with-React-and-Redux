@@ -84,6 +84,7 @@ class BurgerBuilder extends Component{
             }).reduce((sum, el)=>(
                 sum+el
             ),0)
+            console.log(sum)
             
         this.setState({
             purchasable:sum <= 0
@@ -117,7 +118,7 @@ class BurgerBuilder extends Component{
         for(let key in disabledInfo){
             disabledInfo[key] = disabledInfo[key] <= 0
         }
-        console.log(this.state.showSummery)
+    
         return(
             <div>
                 
