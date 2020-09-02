@@ -435,7 +435,7 @@ module.exports = function(webpackEnv) {
                 modules: {
                   localIdentName: "[name]__[local]___[hash:base64:5]",
               },
-            	}),
+              }),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
               // Remove this when webpack adds a warning or an error for this.
