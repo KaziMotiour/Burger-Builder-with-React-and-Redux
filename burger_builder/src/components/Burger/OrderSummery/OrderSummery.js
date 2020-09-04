@@ -1,4 +1,5 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 import Button from '../../UI/Buttons/Button'
 const orderSummery = props =>{
 
@@ -8,6 +9,10 @@ const orderSummery = props =>{
                             <span>{igkey}</span> : {props.ingredients[igkey]}
                         </li>
                     ))
+
+    const ConfirmOrder = () =>{
+        props.history.push('/checkout')
+    }
 
  return(
 
@@ -19,10 +24,10 @@ const orderSummery = props =>{
         </ul>
             <p><strong>Total Price: {props.totalPrice.toFixed(2)} $ </strong></p>
         <p>Continue with checkout?</p>
-        <Button btnType="Success" clicked={props.purchasedContinuedHendelar}>Confirm order</Button> 
+        <Button btnType="Success" clicked={props.ConfrmOrder}>Confirm order</Button> 
         <Button btnType="Danger" clicked={props.showSummery}>Cancel order</Button>
     </div>
  )
 }
 
-export default orderSummery
+export default withRouter(orderSummery)

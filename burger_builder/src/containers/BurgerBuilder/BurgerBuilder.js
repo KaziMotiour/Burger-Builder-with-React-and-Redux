@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Route, Switch, withRouter} from 'react-router-dom'
 import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import BuildControl from '../../components/Burger/BuildControls/BuildControl/BuildControl'
@@ -9,6 +10,8 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 import { types } from '@babel/core'
 import Axios from 'axios'
 import withErrorHandeling from '../../hoc/WithErrorHandeling/WithErrorHandeling'
+
+import CheckOutSummery from '../../components/Order/CheckOutSummery/CheckOutSummery'
 
 const ingredientsPrice={
     salad: 0.5,
@@ -107,25 +110,27 @@ class BurgerBuilder extends Component{
     }
 
     purchasedContinued = () =>{
-        this.setState({loading:true})
-        const order={
-            ingredients:this.state.ingredients,
-            totalPrice:(this.state.totalPrice).toFixed(2),
-            customer:{
-                name:'Max',
-                email:'kmatiour30@gmail.com',
-                address:{
-                    street:'Santi-nir',
-                    zipCode:'41315',
-                    country:'bangaldesh,cumilla'
-                },
-            },
-            deliveryMethod:'fastest'
-        }
+        // this.setState({loading:true})
+        // const order={
+        //     ingredients:this.state.ingredients,
+        //     totalPrice:(this.state.totalPrice).toFixed(2),
+        //     customer:{
+        //         name:'Max',
+        //         email:'kmatiour30@gmail.com',
+        //         address:{
+        //             street:'Santi-nir',
+        //             zipCode:'41315',
+        //             country:'bangaldesh,cumilla'
+        //         },
+        //     },
+        //     deliveryMethod:'fastest'
+        // }
 
-        axios.post('orders.json',order)
-        .then(response=> this.setState({ loading:false, showSummery:false}))
-        .catch(error=>this.setState({loading:false, showSummery:false}))
+        // axios.post('orders.json',order)
+        // .then(response=> this.setState({ loading:false, showSummery:false}))
+        // .catch(error=>this.setState({loading:false, showSummery:false}))
+
+        
     }
     // showSummeryHandellar = () =>{ff
     //     this.setState({
@@ -133,7 +138,32 @@ class BurgerBuilder extends Component{
     //     })
     // }
 
+   
 
+    confrmOrder = () =>{
+        this.setState({ loading:false, showSummery:false})
+
+        const  queryParams = []
+        for(let i in this.state.ingredients){
+          
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
+        }
+
+        const queryString = queryParams.join('&')
+        
+        this.props.history.push({
+            pathname:'/checkout',
+            search:'?'+ queryString
+
+        })
+
+    }
+    checkoutCancelledHandler = () =>{
+        this.props.history.goBack();
+    }
+    checkoutcontinuedHandler = () =>{
+        this.props.history.push('/checkout/collected-data');
+    }
 
 
     render(){
@@ -147,8 +177,9 @@ class BurgerBuilder extends Component{
             disabledInfo[key] = disabledInfo[key] <= 0
         }
         let orderSummery = <OrderSummery
+        ConfirmOrder={this.ConfirmOrder}
         totalPrice={this.state.totalPrice} 
-        purchasedContinuedHendelar={this.purchasedContinued}  
+        ConfrmOrder={this.confrmOrder}  
         showSummery={this.showSummeryHandellar} 
         ingredients={this.state.ingredients}/>
 
@@ -172,8 +203,23 @@ class BurgerBuilder extends Component{
             )
         }
 
+
+        let checkoutSummery = this.state.error ? 
+        <p style={{textAlign:'center',}}> <strong>Ingredient can't be loadded!</strong></p>:<Spinner />
+       
+        if(this.state.ingredients){
+            checkoutSummery=(
+                <div>
+                <CheckOutSummery 
+                ingredients={this.state.ingredients}
+                checkoutCancelledHandler={this.checkoutCancelledHandler}
+                checkoutcontinuedHandler={this.checkoutcontinuedHandler}
+                />
+                </div>
+            )
+        }
         
-        
+
         if(this.state.loading){
             orderSummery = <Spinner />
         }
@@ -184,11 +230,16 @@ class BurgerBuilder extends Component{
                 {this.state.showSummery? <Modal showSummery={this.state.showSummery} showSummeryHandellar={this.showSummeryHandellar}> 
                     {orderSummery}
                 </Modal>:null}
-                {burger}
                 
+
+                <Switch>
+                <Route path='/burger' render={() => burger}/>
+                <Route path='/checkout' exact strict render={() => checkoutSummery} />
+                <Route render={() => this.props.history.push('/burger')} />
+                </Switch>
             </div>
         )
     }
 }
 
-export default withErrorHandeling(BurgerBuilder, axios)
+export default withErrorHandeling(withRouter(BurgerBuilder), axios)

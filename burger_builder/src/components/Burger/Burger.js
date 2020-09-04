@@ -4,7 +4,7 @@ import BurgerIngredient from './BurgerIngredient/BurgerIngredient'
 import BurgerBuilder from '../../containers/BurgerBuilder/BurgerBuilder'
 
 const burger = props =>{
-
+    console.log(props.ingredients)
     let transformIngredients = Object.keys(props.ingredients).map(igkey =>(
         [...Array(props.ingredients[igkey])].map((_, i) =>(
             <BurgerIngredient key={igkey+i} type={igkey} />
@@ -18,15 +18,17 @@ const burger = props =>{
      transformIngredients=<p>Please start adding ingredients"</p>
  }
 // console.log(transformIngredients.length)
+    const burger=( <div className={CSS.Burger}>
+        <BurgerIngredient type="bread-top"/>
+        {transformIngredients}
+        <BurgerIngredient type="bread-bottom"/>
 
+    </div>)
 
     return(
-        <div className={CSS.Burger}>
-            <BurgerIngredient type="bread-top"/>
-            {transformIngredients}
-            <BurgerIngredient type="bread-bottom"/>
-
-        </div>
+        <div>
+       {burger}
+       </div>
     )
 }
 
