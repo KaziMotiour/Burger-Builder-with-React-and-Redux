@@ -43,7 +43,7 @@ class BurgerBuilder extends Component{
     }
 
     addIngredients = (types) =>{
-        console.log(types)
+
         
         const oldCount = this.state.ingredients[types]
         const updatedCount = oldCount+1
@@ -95,12 +95,11 @@ class BurgerBuilder extends Component{
             }).reduce((sum, el)=>(
                 sum+el
             ),0)
-            console.log(sum)
             
         this.setState({
             purchasable:sum <= 0
         })
-        console.log(this.state.purchasable)
+      
     }
 
     showSummeryHandellar = () =>{
@@ -120,7 +119,7 @@ class BurgerBuilder extends Component{
         //         address:{
         //             street:'Santi-nir',
         //             zipCode:'41315',
-        //             country:'bangaldesh,cumilla'
+        //             country:'bangaldesh, cumilla'
         //         },
         //     },
         //     deliveryMethod:'fastest'
@@ -162,7 +161,7 @@ class BurgerBuilder extends Component{
         this.props.history.goBack();
     }
     checkoutcontinuedHandler = () =>{
-        this.props.history.push('/checkout/collected-data');
+        this.props.history.push('/checkout/contact-data');
     }
 
 
@@ -234,7 +233,7 @@ class BurgerBuilder extends Component{
 
                 <Switch>
                 <Route path='/burger' render={() => burger}/>
-                <Route path='/checkout' exact strict render={() => checkoutSummery} />
+                <Route path='/checkout' render={() => checkoutSummery} />
                 <Route render={() => this.props.history.push('/burger')} />
                 </Switch>
             </div>

@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import Burger from '../../Burger/Burger'
 import CSS from './CheckOutSummery.css'
 import Button from '../../UI/Buttons/Button'
-import {withRouter} from 'react-router-dom'
+import {withRouter, Route} from 'react-router-dom'
+import ContactData from '../ContactData/ContactData'
 
 class CheckOutSummery extends Component{
 
@@ -24,12 +25,12 @@ class CheckOutSummery extends Component{
         for(let param of query.entries()){
             ingredients[param[0]] = param[1]
         }
-        console.log(ingredients)
         this.setState({ingredients:ingredients})
        
     }
         
 render(){
+    console.log(this.props.match.path)
     return(
         <div className={CSS.CheckOutSummery}>
             <h1 style={{textAlign:'center'}}>We hope it tastes will!</h1>
@@ -40,6 +41,11 @@ render(){
             <Button btnType="Danger"  clicked={this.props.checkoutCancelledHandler}>CANCLE</Button>
             <Button btnType="Success" clicked={this.props.checkoutcontinuedHandler}>CONFIRM</Button>
             </div>
+       
+        <div>
+            <Route path={this.props.match.path + '/contact-data'}  component={ContactData} />
+        </div>
+            
         </div>
     )
 }
