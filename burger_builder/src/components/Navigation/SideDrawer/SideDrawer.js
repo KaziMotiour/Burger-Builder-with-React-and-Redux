@@ -1,12 +1,10 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Logo from '../../Logo/Logo'
 import NavigationItems from '../../Navigation/NavigationItems/NavigationItems'
 import CSS from './SideDrawer.css'
-import BackDrop  from '../../UI/BackDrop/BackDrop'
 
 const sideDrawer = props =>{
     
-    let attachedClasses = [CSS.sideDrawer, CSS.Close]
     // if(props.open){
     //     attachedClasses = [CSS.sideDrawer, CSS.Open]
     // }

@@ -9,11 +9,6 @@ const orderSummery = props =>{
                             <span>{igkey}</span> : {props.ingredients[igkey]}
                         </li>
                     ))
-
-    const ConfirmOrder = () =>{
-        props.history.push('/checkout')
-    }
-
  return(
 
     <div>

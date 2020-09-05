@@ -2,16 +2,13 @@ import React, {Component} from 'react'
 import {Route, Switch, withRouter} from 'react-router-dom'
 import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
-import BuildControl from '../../components/Burger/BuildControls/BuildControl/BuildControl'
 import Modal from '../../components/UI/Modal/Modal'
 import OrderSummery from '../../components/Burger/OrderSummery/OrderSummery'
 import axios from '../../axios-order'
 import Spinner from '../../components/UI/Spinner/Spinner'
-import { types } from '@babel/core'
-import Axios from 'axios'
 import withErrorHandeling from '../../hoc/WithErrorHandeling/WithErrorHandeling'
-
 import CheckOutSummery from '../../components/Order/CheckOutSummery/CheckOutSummery'
+import Orders from './Orders/Orders'
 
 const ingredientsPrice={
     salad: 0.5,
@@ -148,6 +145,7 @@ class BurgerBuilder extends Component{
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
         }
 
+        queryParams.push('price=' +this.state.totalPrice)
         const queryString = queryParams.join('&')
         
         this.props.history.push({
@@ -234,6 +232,7 @@ class BurgerBuilder extends Component{
                 <Switch>
                 <Route path='/burger' render={() => burger}/>
                 <Route path='/checkout' render={() => checkoutSummery} />
+                <Route path='/Order' component={Orders}/>
                 <Route render={() => this.props.history.push('/burger')} />
                 </Switch>
             </div>
