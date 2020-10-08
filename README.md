@@ -4,7 +4,7 @@ This is a Burger builder project  with React and Firebase. By using this web app
 and provider abe to tack customers orders.
 
 # Live Demo
-https://burger-builder-1e42d.web.app
+https://burger-builder-1e42d.web.app/burger
 
 
 ##  Tools
