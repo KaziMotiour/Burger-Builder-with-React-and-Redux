@@ -14,4 +14,4 @@ https://burger-builder-1e42d.web.app/burger
 
 Copyright (c) 2020-3020 Kazi Motiour Rahman
 
-o Through This Site Then You Will Know About This Site Prop
+Go Through This Site Then You Will Know About This Site Prop
