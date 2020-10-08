@@ -17,7 +17,8 @@ const burger = props =>{
      transformIngredients=<p>Please start adding ingredients"</p>
  }
 // console.log(transformIngredients.length)
-    const burger=( <div className={CSS.Burger}>
+    const burger=( 
+    <div className={CSS.Burger}>
         <BurgerIngredient type="bread-top"/>
         {transformIngredients}
         <BurgerIngredient type="bread-bottom"/>

@@ -33,7 +33,7 @@ class Orders extends Component{
     
     
     render(){
-        let order=(<h1>No Order panding</h1>)
+        let order=(<h1 style={{textAlign:'center'}}>No Order yeat</h1>)
         if(this.state.orders){
         order = this.state.orders.map(order=>(
            <Order key={order.id} ingredients={order.ingredients} 

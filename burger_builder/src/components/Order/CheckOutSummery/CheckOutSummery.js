@@ -23,21 +23,27 @@ class CheckOutSummery extends Component{
             if(param[0] === 'price'){
                 totalPrice=param[1]
             }else{
-             ingredients[param[0]] = param[1]
+             ingredients[param[0]] = parseInt(param[1])
             }
         }
         this.setState({ingredients:ingredients, price:totalPrice})
        
     }
+    
         
 render(){
+    console.log(this.state.ingredients)
+    let burger=<Spinner />
+    if(this.state.ingredients){
+        burger = <Burger  ingredients={this.state.ingredients}/>
+    }
     return(
         <div className={CSS.CheckOutSummery}>
             
             <h1 style={{textAlign:'center'}}>We hope it tastes will!</h1>
             
             <div style={{ height:'300px', margin:'auto'}}>
-                <Burger  ingredients={this.props.ingredients} />
+                {burger}
             </div>
             
             <div style={{marginTop:'auto'}}>
